@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="layout :: head">
+</head>
+<body style="background: white;">
+	<div id="wrapper">
+        <!-- Navigation -->
+        <div th:replace="layout :: nav"></div>
+        <div id="page-wrapper">
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Daftar Mahasiswa
+                        </h1>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-12">
+                        <div th:if="${alertTrue}" class="alert alert-success">
+						  <strong>Suksess!</strong> Mahasiswa berhasil dihapus
+						</div>
+                        <div th:if="${not #lists.isEmpty(daftarMahasiswa)}">
+							<table class="table table-striped">
+					  			<tr>
+					  				<th>Nama</th>
+					  				<th>Mahasiswa</th>
+					  				<th>Aksi</th>
+					  			</tr>
+					  			<tr th:each="mahasiswas : ${daftarMahasiswa}">
+					  				<td th:text="${mahasiswas.nama}"></td>
+					  				<td>
+					  					<a th:href="${'/mahasiswa/lihat/'+mahasiswas.id}" class="btn btn-primary">Lihat</a>
+					  				</td>
+					  				<td>
+					  					<a th:href="${'/mahasiswa/delete/'+mahasiswas.id}" class="btn btn-primary" style="background-color: #f44336;">Delete</a>
+					  				</td>
+					  			</tr>
+					  			
+							</table>
+							
+						</div>
+                    </div>
+                    	
+                </div>
+                <!-- /.row -->
+        		</div>
+        		
+        	
+          </div>
+      </div>
+ 	
+ 	<!-- jQuery -->
+	<div th:replace="layout :: script"></div>
+	
+</body>
+</html>

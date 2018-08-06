@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en" th:replace="layout :: head">
+</head>
+
+<body style="background: white;">
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <div th:replace="layout :: nav"></div>
+        
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                	<div class="col-lg-1">
+                           <img width="90" class="lib-img-show" src="/image/logo_himsi.png"/>
+                     </div>
+                    <div class="col-lg-9">
+                        <h1 class="page-header">
+                            Himpunan Mahasiswa Sistem Informasi 
+                        </h1>
+                      </div>
+                  </div><br/>
+                  <div class="row">
+                      <div class="col-lg-7">
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-clock-o"></i> Latest News
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="breadcrumb">
+                            <h3 class="panel-title"><i class="fa fa-info-circle"></i> Pengumuman</h3>
+                         </div>	
+                          
+        			</div>	
+                </div>
+                <!-- /.row -->
+             
+					<div class="row">
+            			<div class="col-lg-7  lib-item" data-category="view">
+                			<div class="lib-panel" th:each="beritas : ${allBerita}">
+                    			<div  class="row box-shadow">
+                    			<div th:if="${beritas.foto}" class="col-md-4">
+                    				<img width="90" height ="180" class="lib-img-show" th:src="${'/image/berita/'+beritas.foto}"/>
+                    			</div>
+                        		<div class="col-md-6">
+                            		<div class="lib-row lib-header">
+                                		<h3 th:text="${beritas.judul_berita}"></h3>
+                                		<div class="lib-header-seperator"></div>
+                            		</div><br/><br/>
+                            		<div class="lib-row lib-desc">
+                        				<a class="url fn n" th:href="${'/berita/'+beritas.id_berita}">Read More. . .</a>
+                        			</div>
+                        		</div><br/><br/>
+                        		
+                    		</div>
+                		</div>
+                		<br/>
+                		<div class="text-left">
+                             <a href="/all/berita">Lihat Semua Berita <i class="fa fa-arrow-circle-right"></i></a>
+                          </div>
+                		<hr/>
+                		<div>
+                			<p><i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                			<b>Who's birthday today?<i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                			</b></p>
+                			<div th:if="${not #lists.isEmpty(userUltah)}">
+                				<ul th:each="user : ${userUltah}">
+                					<li th:text="${user.nama}"></li>
+                				</ul>
+                			</div>
+                			<div th:if="${#lists.isEmpty(userUltah)}">
+                				<p><b>Nobody is birthday today</b></p>
+                			</div>
+                		</div>
+            		</div>
+            			<div class="col-lg-5">
+            				<div class="box box-solid ">
+                            	
+                        		<!-- isi disini -->
+                        		<div id="pengumuman-block-body" class="box-body">
+                        			<div class="dashboard-pengumuman" th:each="pengumuman : ${allPengumuman}">
+                						<div class='title'>
+                    						<a th:href="${'/pengumuman/'+pengumuman.id}"><strong th:text="${pengumuman.judul_pengumuman}"></strong></a>
+                						</div>
+                						<div class="meta">
+                    						<ul>
+                        						<li class='datetime'><i class="fa fa-clock-o" th:text="${pengumuman.waktu_publish_pengumuman}"></i></li>
+                    						</ul>
+                						</div>
+            						</div>
+                        
+                        
+                        			<div class="text-left">
+                                    	<br/><br/><a href="/all/pengumuman">Lihat Semua Pengumuman <i class="fa fa-arrow-circle-right"></i></a>
+                            		</div>
+                           		</div>
+							</div>
+						</div>
+        		</div>
+        		
+        	
+          </div>
+      </div>
+ </div>
+ 	
+ 	<div th:replace="layout :: script"></div>
+	
+ </body>
+ </html>

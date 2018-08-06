@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en" th:replace="layout :: head">
+</head>
+
+<body style="background: white;">
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <div th:replace="layout :: nav"></div>
+        
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                      <div class="col-lg-12">
+                      		<h1 class="page-header">
+                       Daftar User
+                     </h1>
+                     <div>
+							<button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary center-block" style="display:inline-block">Add New User</button>
+						</div><br/>
+                        <div th:if="${alertTrue}" class="alert alert-success">
+						  <strong>Suksess!</strong> Akun User telah berhasil dibuat.
+						</div>
+                        <div th:if="${not #lists.isEmpty(allUser)}">
+							<table class="table table-striped">
+					  			<tr>
+					  				<th>NIM</th>
+					  				<th>Nama</th>
+					  				<th>Aksi</th>
+					  				
+					  			</tr>
+					  			<tr th:each="users : ${allUser}">
+					  				<td th:text="${users.id_user}"></td>
+					  				<td th:text="${users.nama}"></td>
+					  				<td>
+					  					<a th:href="${'/edit/user/'+users.id}" class="btn btn-primary">Lihat</a>
+					  				</td>
+					  			</tr>
+					  			
+							</table>
+							
+						</div>
+                    </div>
+                    	
+                </div>
+                <!-- /.row -->
+        		</div>
+        		
+        	
+          </div>
+      </div>
+ 	<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+						<h3 class="modal-title" id="lineModalLabel">Create New User</h3>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" th:object="${user}" th:action="@{'/create/user'}" method="post" enctype="multipart/form-data">
+							<input type="hidden" th:field="*{id}"/>
+							<input type="hidden" th:field="*{version}"/>
+							<div class="form-group">
+								<div class="col-sm-10">
+									<input type="text" required = "required" placeholder="Nama User" class="form-control" th:field="*{nama}"/>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="col-sm-10">
+									<input type="text" placeholder="Id User" class="form-control" th:field="*{id_user}"/>
+								</div>
+							</div>
+	
+							<div class="form-group">
+								<div class="col-sm-10">
+									<input type="text" placeholder="Password" class="form-control" th:field="*{password}"/>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="col-sm-10">
+									<input type="text" placeholder="Email" class="form-control" th:field="*{email}"/>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="col-sm-10">
+									<input type="Date" placeholder="Tanggal Lahir" class="form-control" th:field="*{tanggal_lahir}"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-10">
+	                                <select class="form-control" name="jabatan">
+	                                    <option value="1">Ketua Himpunan</option>
+	                                    <option value="2">Sekretaris</option>
+	                                    <option value="3">Bendahara</option>
+	                                    <option value="4">Ketua Divisi Pendidikan and Penelitian</option>
+	                                    <option value="5">Ketua Divisi Agama and Kerohanian</option>
+	                                    <option value="6">Ketua Divisi Seni and Peralatan</option>
+	                                    <option value="7">Ketua Divisi Pengabdian Masyarakan</option>
+	                                    <option value="8">Anggota Divisi Pendidikan and Penelitian</option>
+	                                    <option value="9">Anggota Divisi Agama and Kerohanian</option>
+	                                    <option value="10">Anggota Divisi Seni and Peralatan</option>
+	                                    <option value="11">Anggota Divisi Pengabdian Masyarakan</option>
+	                                    <option value="12">Anggota Himpunan</option>
+	                                </select>
+                                </div>
+                            </div>
+							
+							
+							<button type="submit" class="btn btn-primary center-block" style="display:inline-block">Add New</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+ 	<!-- jQuery -->
+    <div th:replace="layout :: script"></div>
+ </body>
+ </html>

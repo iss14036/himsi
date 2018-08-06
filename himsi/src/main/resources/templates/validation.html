@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+</head>
+
+<body style="background : white;">
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <div th:replace="layout :: nav"></div>
+      </div> 
+      
+        <div id="page-wrapper">
+			<div class="row">
+				 <div class="col-lg-2">
+                	</div>		
+				
+                 <div class="col-lg-8">
+                    <div class="container">
+		  <h2 class="page-header">Validation</h2>
+		
+		  <ul class="nav nav-tabs">
+		    <li class="active"><a data-toggle="tab" href="#proposal">Pengajuan Dana</a></li>
+		    <li><a data-toggle="tab" href="#berita">Berita</a></li>
+		    <li><a data-toggle="tab" href="#daftarValidasi">Daftar Validasi Pengajuan Dana</a></li>
+		    <li><a data-toggle="tab" href="#daftarBeritaValidasi">Daftar Validasi Berita</a></li>
+		  </ul>
+		  <div class="tab-content">
+		    <div id="proposal" class="tab-pane fade in active">
+		    	<div th:if="${not #lists.isEmpty(allProposal)}">
+					<table class="table table-striped">
+					  	<tr>
+					  		<th>Subjek</th>
+					  		<th>Deskripsi</th>
+					  		<th>File</th>
+					  		<th>Pengajuan Dana</th>
+					  		<th>Validation</th>
+					  	</tr>
+					  	<tr th:each="proposals : ${allProposal}" th:if="${proposals.status=='pending'}">
+					  		<td th:text="${proposals.subjek_pengajuan_dana}"></td>
+					  		<td><a th:href="${'/file/pengajuan_dana/'+proposals.file_pengajuan}" th:text="${proposals.deskripsi_pengajuan_dana}"></a></td>					  				
+					  		<td th:text="${proposals.deskripsi_pengajuan_dana}"></td>
+					  		<td>
+					  			<a th:href="${'/proposal/'+proposals.id}" class="btn btn-primary">Lihat</a>
+					  		</td>
+					  		<td th:if="${proposals.status=='pending'}">
+					  			<a th:href="${'/proposal/accept/'+proposals.id}" class="btn btn-primary" style="background-color: #4CAF50;">Accept</a>
+					  			<a th:href="${'/proposal/reject/'+proposals.id}" class="btn btn-primary" style="background-color: #f44336;">Reject</a>
+					  		</td>
+					  	</tr>
+					  			
+					</table>
+							
+				</div>
+			</div>
+		    <div id="berita" class="tab-pane fade">
+		      <table class="table table-striped">
+					  	<tr>
+					  		<th>Subjek</th>
+					  		<th>Berita</th>
+					  		<th>Aksi</th>
+					  		
+					  	</tr>
+					  	<tr th:each="beritas : ${allBerita}" th:if="${beritas.status_berita=='pending'}">
+					  		<td th:text="${beritas.judul_berita}"></td>
+					  		<td>
+					  			<a th:href="${'/berita/'+beritas.id_berita}" class="btn btn-primary">Lihat</a>
+					  		</td>
+					  		<td>
+					  			<a th:href="${'/berita/accept/'+beritas.id_berita}" class="btn btn-primary" style="background-color: #4CAF50;">Accept</a>
+					  			<a th:href="${'/berita/reject/'+beritas.id_berita}" class="btn btn-primary" style="background-color: #f44336;">Reject</a>
+					  		</td>
+					  	</tr>
+					  			
+					</table>
+		    </div>
+		    <div id="daftarValidasi" class="tab-pane fade">
+		      <table class="table table-striped">
+					  	<tr>
+					  		<th>Subjek</th>
+					  		<th>Deskripsi</th>
+					  		<th>Proposal</th>
+					  		<th>Status</th>
+					  	</tr>
+					  	<tr th:each="proposals : ${allProposal}" th:if="${proposals.status!='pending'}">
+					  		<td th:text="${proposals.subjek_pengajuan_dana}"></td>
+					  		<td th:text="${proposals.deskripsi_pengajuan_dana}"></td>
+					  		<td th:if="${proposals.status=='accepted'}" class="btn btn-primary" style="background-color: #4CAF50; input:disabled" th:text="${proposals.status}"></td>
+					  		<td th:if="${proposals.status=='rejected'}" class="btn btn-primary" style="background-color: #f44336; input:disabled" th:text="${proposals.status}"></td>
+					  		<td>
+					  			<a th:href="${'/proposal/'+proposals.id}" class="btn btn-primary">Lihat</a>
+					  		</td>
+					  	</tr>
+					  			
+					</table>
+		    </div>
+		    <div id="daftarBeritaValidasi" class="tab-pane fade">
+		      <table class="table table-striped">
+					  	<tr>
+					  		<th>Subjek</th>
+					  		<th>Aksi</th>
+					  		<th>Status</th>
+					  	</tr>
+					  	<tr th:each="beritas : ${allBerita}" th:if="${beritas.status_berita!='pending'}">
+					  		<td th:text="${beritas.judul_berita}"></td>
+					  		<td>
+					  			<a th:href="${'/berita/'+beritas.id_berita}" class="btn btn-primary">Lihat</a>
+					  		</td>
+					  		<td th:if="${beritas.status_berita=='accepted'}" class="btn btn-primary" style="background-color: #4CAF50; input:disabled" th:text="${beritas.status_berita}"></td>
+					  		<td th:if="${beritas.status_berita=='rejected'}" class="btn btn-primary" style="background-color: #f44336; input:disabled" th:text="${beritas.status_berita}"></td>
+					  		
+					  	</tr>
+					  			
+					</table>
+		    </div>
+		  </div>
+		</div>
+                  </div>
+             </div><br/>
+            
+      </div>
+ 
+ 	<!-- jQuery -->
+    <div th:replace="layout :: script"></div>
+ </body>
+ </html>

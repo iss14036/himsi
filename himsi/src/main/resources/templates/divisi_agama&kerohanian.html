@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <title>Divisi agama dan Kerohanian</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+	<link th:href="@{/css/konten.css}" rel="stylesheet"/>
+	<link th:href="@{/css/default.min.css}" rel="stylesheet"/>
+	<link th:href="@{/css/home.css}" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <link th:href="@{/css/sb-admin.css}" rel="stylesheet"/>
+
+    <!-- Morris Charts CSS -->
+    <link th:href="@{/css/plugins/morris.css}" rel="stylesheet"/>
+	<link th:href="@{/css/modal.css}" rel="stylesheet" media="screen"/>
+    <!-- Custom Fonts -->
+    <link th:href="@{/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+				<ul class="nav navbar-nav navbar-left">
+                	<li><img width="40" class="lib-img-show" src="image/logo_himsi.png"/></li>              
+                	<li><a class="navbar-brand" href="/">Himpunan Sistem Informasi</a></li>
+                </ul>
+            </div>
+            <!-- Top Menu Items -->
+            <div class="navbar-collapse collapse">
+                 <ul class="nav navbar-nav">
+                     <li><a href="/">Home</a>
+           			  </li>
+                      <li ><a href="/about">About</a>
+                      </li>
+                      <li><a href="/visiMisi">Visi Misi</a>
+           			  </li>
+                      <li class="dropdown active">
+                      	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Divisi <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                           <li>
+                                <a href="/divisi_pendidikan"><i class="fa fa-fw fa-university"></i> Pendidikan dan Penelitian</a>
+                            </li>
+                            <li>
+                                <a href="/divisi_agama"><i class="fa fa-fw fa-arrows"></i> Agama dan Kerohanian</a>
+                            </li>
+                            <li>
+                                <a href="/divisi_seni"><i class="fa fa-fw fa-steam"></i> Seni dan Peralatan</a>
+                            </li>
+                            <li>
+                                <a href="/divisi_pengabdian"><i class="fa fa-fw fa-globe"></i> Pengabdian Masyarakat</a>
+                            </li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <ul class="nav navbar-right top-nav">
+                    	<li>
+                            <a href="/login" > Login</a>
+                        </li>
+                    </ul>
+             </div>
+        </nav>
+      </div> 
+      
+        <div id="page-wrapper">
+			<div class="row">
+				 <div class="col-lg-2">
+                	</div>	
+                	
+                	 <div class="col-lg-8">
+                    <h1 class="page-header">
+                       Divisi Agama dan Kerohanian
+                     </h1><br/>
+                     <img src="image/struktur_organisasi/natal.JPG" alt="" style="width:100%;height:33em"/>
+                     <br/><br/>
+                    <div class="entry-content clearfix">
+					
+                    	 <p><strong>Penjelasan</strong></p>
+						 <p> Divisi Agama dan Kerohanian merupakan salah satu divisi yang terbentuk dengan tujuan untuk 
+						 “Merealisasikan tujuan Himpunan Mahasiswa Sistem Informasi dalam bidang keagamaan serta pelayanan sosial sesuai dengan nilai inti IT Del dalam hal marTuhan dan marRoha”.</p>
+						<br/>
+						
+						<p><strong>Struktur Kepengurusan Divisi Agama dan Kerohanian</strong></p>
+						<p>Divisi ini dipimpin oleh 1 orang koordinator dan memiliki 6 orang anggota.</p>
+						<br/>
+						
+						<p><strong>Program Kerja yang terlaksana:</strong></p>
+						<p>1. Perayaan Natal</p>
+						<p>Pada tanggal 5 Desember 2016, mahasiswa/i program studi sistem informasi mengadakan kegiatan perayaan Natal di Gereja HKBP Sitoluama. Perayaan ini dihadiri oleh Rektor Institut Teknologi Del yaitu Bapak Togar Simaptupang, Wakil Rektor-III yaitu Bapak Bambang Abednego, dan juga Ketua Program Studi Sistem Informasi yaitu Bapak Tennov Simanjuntak dan keluarga.
+                    	Perayaan ini merupakan perayaan Natal pertama yang dilakukan oleh himpunan.  </p>
+						
+						<p>2. Buka Puasa Bersama.</p>
+						<p>3. Bakti Sosial.</p>
+						
+					</div><!-- end .entry-content -->
+
+                  </div>
+             </div><br/>
+            
+      </div>
+ 
+ 	
+ 	<!-- jQuery -->
+    <script th:src="@{/js/jquery.js}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+	
+ </body>
+ </html>

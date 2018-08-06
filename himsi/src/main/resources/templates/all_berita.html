@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en" th:replace="layout :: head">
+</head>
+
+<body style="background: white;">
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <div th:replace="layout :: nav"></div>
+        
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h1 class="page-header">
+                            Semua Berita
+                        </h1>
+                      </div>
+                      <div class="col-lg-1">
+                           
+                     </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-7">
+                      	<div class="lib-panel" th:each="r, itrStat : *{allBerita}">
+                    			<div  class="row box-shadow">
+                    			<div th:if="${allBerita[__${itrStat.size-itrStat.count}__].foto}" class="col-md-4">
+                    				<img width="90" height ="180" class="lib-img-show" th:src="${'/image/berita/'+allBerita[__${itrStat.size-itrStat.count}__].foto}"/>
+                    			</div>
+                        		<div class="col-md-6">
+                            		<div class="lib-row lib-header">
+                                		<h3 th:text="${allBerita[__${itrStat.size-itrStat.count}__].judul_berita}"></h3>
+                                		<div class="lib-header-seperator"></div>
+                            		</div><br/><br/>
+                            		<div class="lib-row lib-desc">
+                        				<a class="url fn n" th:href="${'/berita/'+allBerita[__${itrStat.size-itrStat.count}__].id_berita}">Read More. . .</a>
+                        			</div>
+                        		</div><br/><br/>
+                        		
+                    		</div>
+                		</div>
+                    </div>
+                    	
+                </div>
+                <!-- /.row -->
+        		</div>
+        		
+        	
+          </div>
+      </div>
+ 	
+ 	<!-- jQuery -->
+    <div th:replace="layout :: script"></div>
+ </body>
+ </html>

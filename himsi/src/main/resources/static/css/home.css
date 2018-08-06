@@ -1,0 +1,19 @@
+.dashboard-pengumuman > .meta {
+  font-size: 9px;
+  font-weight: 300;
+  /*background-color: #f2f2f2;*/
+}
+.dashboard-pengumuman > .meta > ul {
+  padding-left: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-bottom: 5px;
+}
+.dashboard-pengumuman > .meta > ul > li {
+  display: inline;
+  list-style-type: none;
+  padding-right: 20px;
+}
+.dashboard-pengumuman > .meta > ul > li > i{
+  padding-right: 5px;
+}

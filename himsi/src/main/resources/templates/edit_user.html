@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <title>Edit User</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+	<link th:href="@{/css/konten.css}" rel="stylesheet"/>
+	<link th:href="@{/css/default.min.css}" rel="stylesheet"/>
+	<link th:href="@{/css/home.css}" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <link th:href="@{/css/sb-admin.css}" rel="stylesheet"/>
+
+    <!-- Morris Charts CSS -->
+    <link th:href="@{/css/plugins/morris.css}" rel="stylesheet"/>
+	<link th:href="@{/css/modal.css}" rel="stylesheet" media="screen"/>
+    <!-- Custom Fonts -->
+    <link th:href="@{/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body style="background:white;">
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+				<ul class="nav navbar-nav navbar-left">
+                	<li><img width="40" class="lib-img-show" src="/image/logo_himsi.png"/></li>              
+                	<li><a class="navbar-brand" href="#">Himpunan Sistem Informasi</a></li>
+                </ul>
+            </div>
+            <!-- Top Menu Items -->
+            <div class="navbar-collapse collapse">
+                 
+                    <ul class="nav navbar-right top-nav">
+                    	<li>
+                            <a href="/logout" > Log Out</a>
+                        </li>
+                    </ul>
+             </div>
+        </nav>
+      </div> 
+      
+        <div id="page-wrapper">
+			<div class="row">
+				 <div class="col-lg-2">
+                	</div>	
+				
+                 <div class="col-lg-8">
+                    <h1 class="page-header">
+                       User
+                     </h1>
+                        <form class="form-horizontal" th:object="${user}" th:action="@{'/create/user'}" method="post" enctype="multipart/form-data">
+							<input type="hidden" th:field="*{id}"/>
+							<input type="hidden" th:field="*{version}"/>
+							<div class="form-group">
+								<div class="col-sm-10">
+									<input type="text" placeholder="Nama User" class="form-control" th:field="*{nama}" readonly="readonly"/>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="col-sm-10">
+									<input type="text" placeholder="Id User" class="form-control" th:field="*{id_user}" readonly="readonly"/>
+								</div>
+							</div>
+	
+							<div class="form-group">
+								<div class="col-sm-10">
+									<input type="text" placeholder="Email" class="form-control" th:field="*{email}" readonly="readonly"/>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="col-sm-10">
+									<input type="text" placeholder="Tanggal Lahir" class="form-control" th:field="*{tanggal_lahir}" readonly="readonly"/>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="col-sm-10">
+									<input type="text" placeholder="Jabatan" class="form-control" th:field="*{pengurus.jabatan}" readonly="readonly"/>
+								</div>
+							</div>
+						</form>
+
+                  </div>
+             </div><br/>
+            
+      </div>	
+ 	
+ 	<!-- jQuery -->
+    <script th:src="@{/js/jquery.js}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+	
+ </body>
+ </html>

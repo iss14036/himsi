@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en" th:replace="layout :: head">
+</head>
+
+<body style="background: white;">
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <div th:replace="layout :: nav"></div>
+        
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h1 class="page-header">
+                            Divisi Seni dan Peralatan
+                        </h1>
+                      </div>
+                      <div class="col-lg-1">
+                           
+                     </div>
+                  </div><br/>
+                  <div class="row">
+                      <div class="col-lg-12">
+           <ul class="nav nav-tabs">
+		    <li class="active"><a data-toggle="tab" href="#programKerja">Program Kerja</a></li>
+		    <li><a data-toggle="tab" href="#berita">Berita</a></li>
+		    <li><a data-toggle="tab" href="#pengurus">Pengurus</a></li>
+		  </ul>
+		  <div class="tab-content">
+		    <div id="programKerja" class="tab-pane fade in active">
+		    	<div th:if="${not #lists.isEmpty(programKerja)}">
+							<table class="table table-striped">
+					  			<tr>
+					  				<th>Subjek</th>
+					  				<th>Deskripsi</th>
+					  			</tr>
+					  			<tr th:each="programs : ${programKerja}">
+					  				<td th:text="${programs.subjek_program_kerja}"></td>
+					  				<td><a th:href="${'/file/program_kerja/'+programs.file_program_kerja}" th:text="${programs.file_program_kerja}"></a></td>		
+					  			</tr>
+					  			
+							</table>
+							
+						</div>
+			</div>
+		    <div id="berita" class="tab-pane fade"><br/>
+			    <div class="col-lg-7  lib-item" data-category="view">
+			     	<div class="lib-panel" th:each="beritas : ${daftarBerita}">
+	                    			<div  class="row box-shadow">
+	                    			<div th:if="${beritas.foto}" class="col-md-4">
+	                    				<img width="90" height ="180" class="lib-img-show" th:src="${'/image/berita/'+beritas.foto}"/>
+	                    			</div>
+	                        		<div class="col-md-6">
+	                            		<div class="lib-row lib-header">
+	                                		<h3 th:text="${beritas.judul_berita}"></h3>
+	                                		<div class="lib-header-seperator"></div>
+	                            		</div>
+	                            		<div class="lib-row lib-desc">
+	                                		<p th:utext="${beritas.isi_singkat_berita}"></p>
+										</div><br/><br/>
+	                            		<div class="lib-row lib-desc">
+	                        				<a class="url fn n" th:href="${'/berita/'+beritas.id_berita}">Read More. . .</a>
+	                        			</div>
+	                        		</div><br/><br/>
+	                        		
+	                    		</div>
+	                		</div>
+	                		<br/><br/>
+	                </div>
+		    </div>
+		    <div id="pengurus" class="tab-pane fade">
+		     	<div th:if="${not #lists.isEmpty(daftarPengurus)}">
+							<table class="table table-striped">
+					  			<tr>
+					  				<th>NIM</th>
+					  				<th>Nama</th>
+					  				
+					  			</tr>
+					  			<tr th:each="users : ${daftarPengurus}">
+					  				<td th:text="${users.id_user}"></td>
+					  				<td th:text="${users.nama}"></td>
+					  			</tr>
+					  			
+							</table>
+							
+						</div>
+		    </div>
+		  </div>
+                        
+                    </div>
+                    	
+                </div>
+                <!-- /.row -->
+        		</div>
+        		
+        	
+          </div>
+      </div>
+ 	
+ 	<!-- jQuery -->
+    <div th:replace="layout :: script"></div>
+ 	
+ </body>
+ </html>

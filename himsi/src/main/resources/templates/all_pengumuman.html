@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en" th:replace="layout :: head">
+</head>
+
+<body style="background: white;">
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <div th:replace="layout :: nav"></div>
+        
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h1 class="page-header">
+                            Semua Pengumuman
+                        </h1>
+                      </div>
+                      <div class="col-lg-1">
+                           
+                     </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-12">
+                      	<div id="pengumuman-block-body" class="box-body">
+                        			<div th:each="r, itrStat : *{allPengumuman}" class="dashboard-pengumuman">
+                						<div class='title'>
+                    						<a th:href="${'/pengumuman/'+allPengumuman[__${itrStat.size-itrStat.count}__].id}"><strong th:text="${allPengumuman[__${itrStat.size-itrStat.count}__].judul_pengumuman}"></strong></a>
+                						</div>
+                						<div class="meta">
+                    						<ul>
+                        						<li class='datetime'><i class="fa fa-clock-o" th:text="${allPengumuman[__${itrStat.size-itrStat.count}__].waktu_publish_pengumuman}"></i></li>
+                    						</ul>
+                						</div>
+            						</div>
+                        
+                           		</div>
+                    </div>
+                    	
+                </div>
+                <!-- /.row -->
+        		</div>
+        		
+        	
+          </div>
+      </div>
+ 	
+ 	<!-- jQuery -->
+    <div th:replace="layout :: script"></div>
+ </body>
+ </html>

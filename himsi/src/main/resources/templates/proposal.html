@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+</head>
+
+<body style="background : white;">
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <div th:replace="layout :: nav"></div>
+      </div> 
+      
+        <div id="page-wrapper">
+			<div class="row">
+				 <div class="col-lg-2">
+                	</div>		
+				
+                 <div class="col-lg-8">
+                    <h3 class="page-header" style="color:green;" th:text="${proposal.subjek_pengajuan_dana}">
+                     </h3>
+                     <img src="image/del.jpg" alt="" style="width:100%;height:30em"/>
+                    <div  class="excerpt">
+						<p th:text="${proposal.deskripsi_pengajuan_dana}"></p>
+					</div><!-- end .entry-content --><br/><br/>
+					<div>
+						<p th:text="'Total Dana : Rp.'+${proposal.total_dana}+',-'"></p>
+					</div>
+                  </div>
+             </div><br/>
+            
+      </div>
+ 
+ 	<!-- jQuery -->
+    <div th:replace="layout :: script"></div>	
+<style>
+ p {
+  white-space: pre;
+ }
+</style>
+	
+ </body>
+ </html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en" th:replace="layout :: head">
+</head>
+
+<body style="background: white;">
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <div th:replace="layout :: nav"></div>
+        
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Daftar Pengajuan Dana
+                        </h1>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-12">
+                      	<div>
+							<button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary center-block" style="display:inline-block">Add Pengajuan Dana</button>
+						</div><br/>
+                        <div th:if="${not #lists.isEmpty(daftarProposal)}">
+							<table class="table table-striped">
+					  			<tr>
+					  				<th>Subjek</th>
+					  				<th>Deskripsi</th>
+					  				<th>File</th>
+					  				<th>Status</th>
+					  				<th>Pengajuan Dana</th>
+					  			</tr>
+					  			<tr th:each="proposals : ${daftarProposal}">
+					  				<td th:text="${proposals.subjek_pengajuan_dana}"></td>
+					  				<td th:text="${proposals.deskripsi_pengajuan_dana}"></td>
+					  				<td><a th:href="${'/file/pengajuan_dana/'+proposals.file_pengajuan}" th:text="${proposals.deskripsi_pengajuan_dana}"></a></td>
+					  				<td th:if="${proposals.status}=='pending'" style="color:yellow;background-color: #4CAF50;" th:text="${proposals.status}"></td>
+					  				<td th:if="${proposals.status}=='rejected'" style="color:red;background-color: #4CAF50;" th:text="${proposals.status}"></td>
+					  				<td th:if="${proposals.status}=='accepted'" style="color:blue;background-color: #4CAF50;" th:text="${proposals.status}"></td>
+					  				<td>
+					  					<a th:href="${'/proposal/'+proposals.id}" class="btn btn-primary">Lihat</a>
+					  				</td>
+					  			</tr>
+					  			
+							</table>
+							
+						</div>
+						
+                    </div>
+                    	
+                </div>
+                <!-- /.row -->
+        		</div>
+          </div>
+      </div>
+      
+      <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+						<h3 class="modal-title" id="lineModalLabel">Create Pengajuan Dana</h3>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" th:object="${proposal}" th:action="@{'/proposal/create/'+${idProgramKerja}}" method="post" enctype="multipart/form-data">
+							<input type="hidden" th:field="*{id}"/>
+							<input type="hidden" th:field="*{version}"/>
+							
+							<div class="form-group">
+								<div class="col-sm-10">
+									<input type="text" required = "required" placeholder="Subjek Pengajuan Dana" class="form-control" th:field="*{subjek_pengajuan_dana}"/>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="col-sm-10">
+									<textarea placeholder="Deskripsi Pengajuan Dana" class="form-control" rows="10" th:field="*{deskripsi_pengajuan_dana}"></textarea>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="col-sm-10">
+									<input type="text" required = "required" placeholder="Dana yang dibutuhkan" class="form-control" th:field="*{total_dana}"/>
+								</div>
+							</div>
+							
+							<div class="form-group">
+							<label class="col-sm-3 control-label:">File Attach : </label>
+							<div class="col-sm-5">
+								<input type="file" name="file" />
+							</div>
+						</div>
+							
+							<button type="submit" class="btn btn-primary center-block" style="display:inline-block">Add New</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+ 	
+ 	<!-- jQuery -->
+    <div th:replace="layout :: script"></div>
+ 	
+ </body>
+ <script th:script = "javascript">
+ 	
+ </script>
+ </html>

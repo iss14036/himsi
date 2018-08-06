@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title th:text="${title}"></title>
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link th:href="@{/css/sb-admin.css}" rel="stylesheet"/>
+	
+    <!-- Morris Charts CSS -->
+    <link th:href="@{/css/plugins/morris.css}" rel="stylesheet"/>
+	<link th:href="@{/css/konten.css}" rel="stylesheet"/>
+	
+	<link th:href="@{/css/home.css}" rel="stylesheet"/>
+    <!-- Custom Fonts -->
+    <link th:href="@{/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
+</head>
+
+<body style="background: white;">
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" th:fragment="nav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            
+            <div class="navbar-header">
+            	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <ul class="nav navbar-nav navbar-right">
+                	<li><img width="40" class="lib-img-show" src="/image/logo_himsi.png"/></li>              
+                	<li><a class="navbar-brand" href="/home">Himpunan Sistem Informasi</a></li>
+                </ul>
+            </div>
+            <!-- Top Menu Items -->
+            <div class="collapse navbar-collapse navHeaderCollapse">
+	            <ul class="nav navbar-nav navbar-right">
+	                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-user" th:text="${'  '+session.user.nama}"></i><b class="caret" ></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a th:href="${'/mahasiswa/profile/'+session.user.id}"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+	            </ul>
+	        </div>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li th:if="${navigation}=='home'" class="active"><a href="/home"><i class="fa fa-fw fa-home"></i> Home</a></li>
+                    <li th:if="${navigation}!='home'"><a href="/home"><i class="fa fa-fw fa-home"></i> Home</a></li>
+                    <li th:if="${navigation}=='divisi'" class="active">
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Divisi <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="/pendidikan"><i class="fa fa-fw fa-university"></i> Pendidikan dan Penelitian</a>
+                            </li>
+                            <li>
+                                <a href="/agama"><i class="fa fa-fw fa-arrows"></i> Agama dan Kerohanian</a>
+                            </li>
+                            <li>
+                                <a href="/seni"><i class="fa fa-fw fa-steam"></i> Seni dan Peralatan</a>
+                            </li>
+                            <li>
+                                <a href="/pengabdian"><i class="fa fa-fw fa-globe"></i> Pengabdian Masyarakat</a>
+                            </li>
+                        </ul>
+                    </li> 
+                    <li th:if="${navigation}!='divisi'">
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Divisi <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="/pendidikan"><i class="fa fa-fw fa-university"></i> Pendidikan dan Penelitian</a>
+                            </li>
+                            <li>
+                                <a href="/agama"><i class="fa fa-fw fa-arrows"></i> Agama dan Kerohanian</a>
+                            </li>
+                            <li>
+                                <a href="/seni"><i class="fa fa-fw fa-steam"></i> Seni dan Peralatan</a>
+                            </li>
+                            <li>
+                                <a href="/pengabdian"><i class="fa fa-fw fa-globe"></i> Pengabdian Masyarakat</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/laporan" th:if="${navigation}=='laporan_keuangan' and  ${session.user.role.deskripsi_role=='Bendahara'}" class="active"><i class="fa fa-fw fa-bar-chart-o"></i> Laporan Keuangan</a></li>
+                    <li><a href="/laporan" th:if="${navigation}!='laporan_keuangan' and  ${session.user.role.deskripsi_role=='Bendahara'}"><i class="fa fa-fw fa-bar-chart-o"></i> Laporan Keuangan</a></li>
+                    <li><a href="/organisasi/create" th:if="${navigation}=='struktur_organisasi'" class="active"><i class="fa fa-fw fa-child"></i> Struktur Organisasi</a></li>
+                    <li><a href="/organisasi/create" th:if="${navigation}!='struktur_organisasi'"><i class="fa fa-fw fa-child"></i> Struktur Organisasi</a></li>
+                    <li><a href="/form/pengumuman"  th:if="${session.user.role.deskripsi_role!='Anggota Divisi dan User'} and ${navigation}=='form_pengumuman'" ><i class="fa fa-bullhorn"></i> Form Pengumuman</a></li>
+                    <li><a href="/form/pengumuman" th:if="${session.user.role.deskripsi_role!='Anggota Divisi dan User'} and ${navigation}!='form_pengumuman'" ><i class="fa fa-bullhorn"></i> Form Pengumuman</a></li>
+                    <li><a href="/form/berita" class="active" th:if="${session.user.role.deskripsi_role!='Anggota Divisi dan User'} and ${navigation}=='form_berita'" ><i class="fa fa-newspaper-o"></i> Form Berita</a></li>
+                    <li><a href="/form/berita" th:if="${session.user.role.deskripsi_role!='Anggota Divisi dan User'} and ${navigation}!='form_berita'" ><i class="fa fa-newspaper-o"></i> Form Berita</a></li>
+                    <li><a href="/programKerja/create" class="active" th:if="${session.user.role.deskripsi_role=='Ketua Divisi'} and ${navigation}=='program_kerja'" ><i class="fa fa-tasks" ></i> Program Kerja</a></li>
+                    <li><a href="/programKerja/create" th:if="${session.user.role.deskripsi_role=='Ketua Divisi'} and ${navigation}!='program_kerja'" ><i class="fa fa-tasks" ></i> Program Kerja</a></li>
+                    <li th:if="${navigation}=='validation'" class="active" th:switch="${session.user.role.deskripsi_role}"><a href="/validation/create" th:case="'Ketua Himpunan'" >
+                    <i class="fa fa-fw fa-globe">
+                    	</i> Validation
+                    	 <span th:if="${validation}!='0'" class="pull-right-container">
+			              <small class="label pull-right bg-green" th:text="${validation}"></small>
+			            </span>
+			            </a>
+			         </li>
+                    <li th:if="${navigation}!='validation'" th:switch="${session.user.role.deskripsi_role}">
+                    <a href="/validation/create" th:case="'Ketua Himpunan'" >
+                    	<i class="fa fa-fw fa-globe">
+                    	</i> Validation
+                    	 <span th:if="${validation}!='0'" class="pull-right-container">
+			              <small class="label pull-right bg-green" th:text="${validation}"></small>
+			            </span>
+                    </a>
+                    </li>
+                    
+                    <li th:if="${navigation}=='validation'" class="active" th:switch="${session.user.role.deskripsi_role}"><a href="/proposal/terima" th:case="'Bendahara'" >
+                    <i class="fa fa-fw fa-globe">
+                    	</i> Validation
+                    	 <span th:if="${notification}!='0'" class="pull-right-container">
+			              <small class="label pull-right bg-green" th:text="${notification}"></small>
+			            </span>
+			            </a>
+			         </li>
+                    <li th:if="${navigation}!='validation'" th:switch="${session.user.role.deskripsi_role}">
+                    <a href="/proposal/terima" th:case="'Bendahara'" >
+                    	<i class="fa fa-fw fa-globe">
+                    	</i> Validation
+                    	 <span th:if="${notification}!='0'" class="pull-right-container">
+			              <small class="label pull-right bg-green" th:text="${notification}"></small>
+			            </span>
+                    </a>
+                    </li>
+                    <li><a href="/daftar/iuranBulanan" class="active" th:if="${navigation}=='program_kerja'" ><i class="fa fa-fw fa-money"></i> Iuran Bulanan</a></li>
+                    <li><a href="/daftar/iuranBulanan" th:if="${navigation}!='program_kerja'" ><i class="fa fa-fw fa-money"></i> Iuran Bulanan</a></li>
+                    <li><a href="/daftar/mahasiswa" class="active" th:if="${session.user.role.deskripsi_role=='Ketua Himpunan'} and ${navigation}=='program_kerja'" ><i class="fa fa-fw fa-globe"></i> Daftar Mahasiswa</a></li>
+                    <li><a href="/daftar/mahasiswa" th:if="${session.user.role.deskripsi_role=='Ketua Himpunan'} and ${navigation}!='program_kerja'" ><i class="fa fa-fw fa-globe"></i> Daftar Mahasiswa</a></li>
+                    <li><a href="/create/user" class="active" th:if="${session.user.role.deskripsi_role=='Sekretaris'} and ${navigation}=='program_kerja'" ><i class="fa fa-fw fa-globe"></i> Tambah Mahasiswa</a></li>
+                    <li><a href="/create/user" th:if="${session.user.role.deskripsi_role=='Sekretaris'} and ${navigation}!='program_kerja'" ><i class="fa fa-fw fa-globe"></i> Tambah Mahasiswa</a></li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+        
+        
+ </div>
+ <div th:fragment="script">	
+ 	<!-- jQuery -->
+    <script type="text/javascript" src="/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/jquery-2.1.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+    <!-- Morris Charts JavaScript -->
+    <script src="/js/plugins/morris/raphael.min.js"></script>
+    <script src="/js/plugins/morris/morris.min.js"></script>
+    <script src="/js/plugins/morris/morris-data.js"></script>
+    
+ </div>
+
+ </body>
+ </html>
